@@ -1,18 +1,25 @@
-import { clientCredentials } from '../utils/client';
+import { clientCredentials, firebase } from '../utils/client';
 // API CALLS FOR BOOKS
 
 const endpoint = clientCredentials.databaseURL;
 
-const getBooks = (uid) =>
+const getBooks = () =>
   new Promise((resolve, reject) => {
-    fetch(`${endpoint}/books.json?orderBy="uid"&equalTo="${uid}"`, {
+    fetch(`${endpoint}/books.json?orderBy="uid"&equalTo="${firebase.auth().currentUser.uid}"`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     })
       .then((response) => response.json())
-      .then((data) => resolve(Object.values(data)))
+      .then((data) => {
+        if (data) {
+          resolve(Object.values(data));
+          console.warn(data);
+        } else {
+          resolve([]);
+        }
+      })
       .catch(reject);
   });
 
