@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-app-router-with-firebase-auth",
+  "name": "Toen DeRamus Simply Books",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,6 +16,7 @@
       "eslint --fix"
     ]
   },
+  "author": "Toren DeRamus",
   "dependencies": {
     "bootstrap": "^5.3.3",
     "firebase": "^8.2.0",
