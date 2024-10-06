@@ -4,18 +4,18 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Button, Card, ListGroup } from 'react-bootstrap';
-import { viewAuthorDetails } from '../../../api/mergedData';
+import { viewAuthorDetails } from '../../../../api/mergedData';
 
 export default function ViewAuthor({ params }) {
   const [authorDetails, setAuthorDetails] = useState({});
 
   // grab firebaseKey from url
-  const { user } = params;
+  const { firebaseKey } = params;
 
   // make call to API layer to get the data
   useEffect(() => {
-    viewAuthorDetails(user).then(setAuthorDetails);
-  }, [user]);
+    viewAuthorDetails(firebaseKey).then(setAuthorDetails);
+  }, [firebaseKey]);
 
   return (
     <Card style={{ width: '18rem' }}>
