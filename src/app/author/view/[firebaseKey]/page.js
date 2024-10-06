@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Button, Card, ListGroup } from 'react-bootstrap';
-import { viewAuthorDetails } from '../../../../api/mergedData';
+import { viewAuthorDetails } from '@/api/mergedData';
 
 export default function ViewAuthor({ params }) {
   const [authorDetails, setAuthorDetails] = useState({});
@@ -33,7 +33,7 @@ export default function ViewAuthor({ params }) {
         </ListGroup.Item>
       </ListGroup>
 
-      <Link href={`/author/${authorDetails.firebaseKey}`} passHref>
+      <Link href={`/author/view/${authorDetails.firebaseKey}`} passHref>
         <Button variant="primary" className="m-2">
           VIEW
         </Button>
