@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
+import AuthorCard from '@/components/AuthorCard';
 import { getAuthors } from '../../../api/authorData';
-import AuthorCard from '../../../components/AuthorCard';
 
 /* eslint-disable react-hooks/exhaustive-deps */
 function ShowAuthors({ params }) {
