@@ -2,9 +2,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { useAuth } from '../utils/context/authContext';
 import { signOut } from '../utils/auth';
 
 export default function NavBar() {
+  const { user } = useAuth();
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
@@ -18,8 +20,14 @@ export default function NavBar() {
             <Link className="nav-link" href="/">
               Books
             </Link>
-            <Link className="nav-link" href="/authors">
+            <Link className="nav-link" href={`/author/${user.uid}`}>
               Authors
+            </Link>
+            <Link className="nav-link" href={`/author/createNew/${user.uid}`}>
+              Create Author
+            </Link>
+            <Link className="nav-link" href={`/author/${user.uid}`}>
+              Profile
             </Link>
           </Nav>
           <Button variant="danger" onClick={signOut}>
