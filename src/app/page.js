@@ -5,6 +5,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import { getBooks } from '../api/bookData';
 import { useAuth } from '../utils/context/authContext';
 import BookCard from '../components/BookCard';
@@ -12,6 +13,7 @@ import BookCard from '../components/BookCard';
 function Home() {
   // TODO: Set a state for books
   const [books, setBooks] = useState([]);
+  const [searchItem, setSearchItem] = useState('');
 
   // TODO: Get user ID using useAuth Hook
   const { user } = useAuth();
@@ -21,24 +23,39 @@ function Home() {
     getBooks(user.uid).then(setBooks);
   };
 
+  function handleChange(e) {
+    setSearchItem(e.target.value);
+  }
+
+  const searchResults = books.filter((book) => JSON.stringify(book).toLocaleLowerCase().includes(searchItem.toLocaleLowerCase()));
+
   // TODO: make the call to the API to get all the books on component render
   useEffect(() => {
     getAllTheBooks();
   }, []);
 
   return (
-    <div className="text-center my-4">
+    <>
+      <div>
+        <input type="search" placeholder="Search For Books" onChange={handleChange} />
+      </div>
       <Link href="/book/new" passHref>
         <Button>Add A Book</Button>
       </Link>
       <div className="d-flex flex-wrap">
         {/* TODO: map over books here using BookCard component */}
-        {books.map((book) => (
+        {searchResults.map((book) => (
           <BookCard key={book.firebaseKey} bookObj={book} onUpdate={getAllTheBooks} />
         ))}
       </div>
-    </div>
+    </>
   );
 }
+
+Home.propTypes = {
+  items: PropTypes.shape({
+    firebaseKey: PropTypes.string,
+  }),
+};
 
 export default Home;
